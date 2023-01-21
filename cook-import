@@ -16,16 +16,34 @@ single_stop_words={"and", "or", "for", "the", "of", "powder", "syrup", "pinch", 
 small_amount_words={"dash", "pinch", "sprinkle", "smidgen", "drop", "bunch"}
 
 parser = argparse.ArgumentParser(
-    description="Automatically extract recipes from online websites."
+    description="Automatically extract recipes from online websites. With no arguments, scraped output defaults to console screen."
 )
-parser.add_argument("-l","--link", help="Input a url link to a recipe")
+
+parser.add_argument(
+    "-l",
+    "--link",
+    help="Specifies the link to the recipe to be scraped.")
+
 parser.add_argument(
     "-f",
     "--file",
-    help="If you want the output to be in a file, use this flag. Otherwise defaults to console screen.",
+    help="Outputs scraped recipe data to a file in the current directory, automatically named after the recipe title.",
     action="store_true",
 )
+
+#TODO: Add user-specified filename positional parameter https://docs.python.org/3/library/argparse.html#name-or-flags
+parser.add_argument(
+    "-n",
+    "--filename",
+    help="Outputs scraped recipe data to specified filename and location.",
+    action="store_true",
+    dest="",
+)
+
 args = parser.parse_args()
+
+with open(args.filename, 'w') as output_file:
+    output_file.write("%s\n" % args.filename)
 
 # Check if no arguments are passed
 if len(sys.argv) == 1:
